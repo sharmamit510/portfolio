@@ -1,57 +1,387 @@
-body {
-  margin: 0;
-  font-family: "Segoe UI", sans-serif;
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:"Inter","Segoe UI",sans-serif;
 }
 
-.container {
-  display: flex;
+body{
+  background:linear-gradient(120deg,#f1f5f9,#e2e8f0);
+  color:#1e293b;
+  line-height:1.75;
 }
 
-a {
-  color: black;
-}
-.sidebar {
-  width: 250px;
-  background-color: #09c5bb;
-  color: white;
-  height: 100vh;
-  padding: 20px;
+.container{
+  display:flex;
+  min-height:100vh;
 }
 
-.sidebar h2 {
-  margin-top: 0;
+.main-wrapper{
+  margin-left:260px;
+  width:100%;
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
 }
 
-.sidebar ul {
-  list-style: none;
-  padding: 0;
+.sidebar{
+  width:260px;
+  background:rgba(2,6,23,0.95);
+  backdrop-filter:blur(12px);
+  color:white;
+  padding:38px 24px;
+  text-align:center;
+  position:fixed;
+  height:100%;
+  border-right:1px solid #1e293b;
+  box-shadow:4px 0 20px rgba(0,0,0,0.25);
 }
 
-.sidebar ul li {
-  margin: 15px 0;
+.profile{
+  margin-bottom:28px;
 }
 
-.sidebar ul li a {
-  color: #fff;
-  text-decoration: none;
+.profile-image{
+  width:145px;
+  height:145px;
+  border-radius:50%;
+  object-fit:cover;
+  margin-bottom:18px;
+  border:3px solid #38bdf8;
+  box-shadow:0 10px 30px rgba(56,189,248,.3);
+  transition:.4s;
 }
 
-.sidebar ul li a:hover {
-  text-decoration: underline;
+.profile-image:hover{
+  transform:scale(1.05);
 }
 
-.content {
-  padding: 60px 100px;
-  flex: 1;
+.sidebar h2{
+  font-family:"Georgia","Times New Roman",serif;
+  font-weight:500;
+  font-size:21px;
+  margin-top:6px;
+  margin-bottom:10px;
 }
 
-.profile-image {
-  width: 80%;
-  border-radius: 8rem;
+.tagline{
+  font-size:13px;
+  color:#94a3b8;
+  line-height:1.35;
+  margin-bottom:8px;
 }
 
-.contact {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
+.lab{
+  margin-top:6px;
+  padding-top:8px;
+  font-size:12.5px;
+  color:#94a3b8;
+  border-top:1px solid rgba(148,163,184,0.15);
+}
+
+.lab a{
+  color:#cbd5e1;
+  text-decoration:none;
+}
+
+.lab a:hover{
+  text-decoration:underline;
+}
+
+.sidebar a{
+  display:block;
+  padding:12px;
+  margin:10px 0;
+  text-decoration:none;
+  color:#94a3b8;
+  border-radius:12px;
+  transition:.25s;
+  font-weight:500;
+  position:relative;
+}
+
+.sidebar a.active{
+  background:#1e293b;
+  color:#38bdf8;
+  box-shadow:0 0 0 1px #334155 inset;
+}
+
+.sidebar a:hover{
+  background:#1e293b;
+  color:#38bdf8;
+  transform:translateX(6px);
+}
+
+.menu a.active::before{
+  content:"";
+  position:absolute;
+  left:-20px;
+  top:8px;
+  bottom:8px;
+  width:3px;
+  background:#38bdf8;
+  border-radius:2px;
+}
+
+.content{
+  padding:80px 80px;
+  flex:1;
+  display:flex;
+  justify-content:center;
+}
+
+.page{
+  max-width:800px;
+  width:100%;
+  line-height:1.75;
+}
+
+.page h1{
+  font-family:"Georgia","Times New Roman",serif;
+  text-align:center;
+  font-size:42px;
+  margin-bottom:35px;
+  color:#020617;
+  font-weight:650;
+  letter-spacing:.4px;
+  position:relative;
+}
+
+.page h1::after{
+  content:"";
+  width:80px;
+  height:3px;
+  background:#38bdf8;
+  display:block;
+  margin:14px auto 0;
+  border-radius:3px;
+}
+
+p{
+  font-size:17px;
+  color:#334155;
+  margin-bottom:18px;
+}
+
+a{
+  color:#0284c7;
+  text-decoration:none;
+}
+
+a:hover{
+  text-decoration:underline;
+}
+
+.card{
+  background:white;
+  padding:24px;
+  border-radius:16px;
+  margin-top:20px;
+  box-shadow:
+    0 6px 18px rgba(15,23,42,0.07),
+    0 0 0 1px rgba(15,23,42,0.04);
+  transition:.3s;
+}
+
+.card:hover{
+  transform:translateY(-6px);
+  box-shadow:
+    0 18px 35px rgba(15,23,42,0.10),
+    0 0 0 1px rgba(56,189,248,0.4);
+}
+
+.card strong{
+  font-size:18px;
+  color:#020617;
+  font-weight:600;
+}
+
+.card em{
+  display:block;
+  margin-top:4px;
+  color:#64748b;
+  font-style:normal;
+  font-size:14px;
+}
+
+.card p{
+  margin-top:10px;
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+
+.pub-section{
+  margin-top:30px;
+}
+
+.pub-section h2{
+  font-family:"Georgia","Times New Roman",serif;
+  font-size:20px;
+  margin-bottom:14px;
+  color:#020617;
+  border-bottom:1px solid #e2e8f0;
+  padding-bottom:6px;
+}
+
+.publication-entry{
+  display:flex;
+  align-items:flex-start;
+  gap:12px;
+  margin-top:18px;
+  padding:6px 0;
+  border-radius:6px;
+  transition:background .15s ease;
+}
+
+.publication-entry:hover{
+  background:rgba(15,23,42,0.04);
+}
+
+.publication-index{
+  font-size:14px;
+  color:#64748b;
+  min-width:28px;
+  padding-top:2px;
+}
+
+.publication-text{
+  display:flex;
+  flex-direction:column;
+  gap:4px;
+}
+
+.publication-title{
+  font-size:17px;
+  font-weight:600;
+  color:#020617;
+  line-height:1.4;
+}
+
+.publication-authors{
+  font-size:15px;
+  color:#475569;
+}
+
+.publication-venue{
+  font-size:14px;
+  color:#64748b;
+}
+
+.education-item,
+.experience-item{
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+}
+
+.edu-header,
+.exp-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:baseline;
+}
+
+.edu-year,
+.exp-year{
+  font-size:14px;
+  color:#64748b;
+}
+
+.edu-institute,
+.exp-details{
+  font-size:15px;
+  color:#475569;
+}
+
+.contact-item{
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
+
+.contact-row{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-size:16px;
+}
+
+.contact-row i{
+  width:20px;
+  color:#64748b;
+}
+
+#main-content{
+  opacity:0;
+  transform:translateY(12px);
+  transition:.35s ease;
+}
+
+#main-content.show{
+  opacity:1;
+  transform:translateY(0);
+}
+
+::-webkit-scrollbar{
+  width:8px;
+}
+
+::-webkit-scrollbar-thumb{
+  background:#cbd5e1;
+  border-radius:10px;
+}
+
+@media(max-width:900px){
+  .sidebar{
+    position:relative;
+    width:100%;
+    height:auto;
+  }
+
+  .main-wrapper{
+    margin-left:0;
+  }
+
+  .content{
+    padding:45px 22px;
+  }
+
+  .page h1{
+    font-size:30px;
+  }
+}
+
+.profile-top{
+  margin-bottom:12px;
+}
+
+.profile-name{
+  font-family: Georgia, "Times New Roman", serif;
+  font-weight:500;
+  font-size:22px;
+  margin-bottom:6px;
+}
+
+.profile-role{
+  font-size:13px;
+  color:#94a3b8;
+  margin-bottom:6px;
+}
+
+.profile-lab{
+  font-size:12.5px;
+  color:#64748b;
+  text-decoration:none;
+  display:inline-block;
+  margin-top:2px;
+  transition:.2s;
+}
+
+.profile-lab:hover{
+  color:#38bdf8;
+}
+
+.menu{
+  margin-top:14px;
 }

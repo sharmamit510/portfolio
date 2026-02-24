@@ -1,56 +1,138 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Amit Sharma - Research Portfolio</title>
-    <link rel="stylesheet" href="style.css" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
-    />
-  </head>
-  <body>
-    <div class="container">
-      <nav class="sidebar">
-        <img
-          class="profile-image"
-          src="./assets/img/image.jpg"
-          alt="Amit Sharma"
-        />
-        <h2>Amit Sharma</h2>
-        <ul>
-          <li>
-            <a href="#" onclick="loadPage('about')">About</a>
-          </li>
-          <li>
-            <a href="#" onclick="loadPage('education')">Education</a>
-          </li>
-          <li>
-            <a href="#" onclick="loadPage('publication')">Publications</a>
-          </li>
-          <li><a href="#" onclick="loadPage('experience')">Experience</a></li>
-          <li><a href="#" onclick="loadPage('contact')">Contact</a></li>
-        </ul>
-      </nav>
-      <main id="main-content" class="content">
-        <!-- Loaded content will appear here -->
-      </main>
-    </div>
-    <script>
-      function loadPage(page) {
-        fetch(`pages\\${page}.html`)
-          .then((response) => response.text())
-          .then((html) => {
-            document.getElementById("main-content").innerHTML = html;
-          })
-          .catch(() => {
-            document.getElementById("main-content").innerHTML =
-              "<p>Page not found.</p>";
-          });
-      }
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-      window.onload = () => loadPage("about");
-    </script>
-  </body>
+<title>Amit Sharma — Research Portfolio</title>
+
+<link rel="stylesheet" href="style.css" />
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+</head>
+
+<body>
+
+<div class="container">
+
+  <!-- ===== SIDEBAR ===== -->
+  <aside class="sidebar">
+
+<header class="profile">
+
+  <div class="profile-top">
+    <img class="profile-image"
+         src="./assets/img/image.jpg"
+         alt="Portrait of Amit Sharma"/>
+  </div>
+
+  <div class="profile-info">
+
+    <h2 class="profile-name">Amit Sharma</h2>
+
+    <p class="profile-role">
+      Ph.D. Scholar · CSE, IIT Hyderabad
+    </p>
+
+    <a class="profile-lab"
+       href="https://sites.google.com/view/scalexlab/home"
+       target="_blank">
+       ScaleX Lab Member
+    </a>
+
+  </div>
+
+</header>
+
+    <nav class="menu" aria-label="Main Navigation">
+      <a href="#" data-page="about">
+        <i class="fa-solid fa-user"></i> About
+      </a>
+
+      <a href="#" data-page="education">
+        <i class="fa-solid fa-graduation-cap"></i> Education
+      </a>
+
+      <a href="#" data-page="publication">
+        <i class="fa-solid fa-book"></i> Publications
+      </a>
+
+      <a href="#" data-page="experience">
+        <i class="fa-solid fa-briefcase"></i> Experience
+      </a>
+
+      <a href="#" data-page="contact">
+        <i class="fa-solid fa-envelope"></i> Contact
+      </a>
+    </nav>
+
+  </aside>
+
+  <!-- ===== MAIN AREA ===== -->
+  <main class="main-wrapper">
+    <section id="main-content" class="content" aria-live="polite">
+      <!-- Pages load here -->
+    </section>
+  </main>
+
+</div>
+
+<script>
+
+/* ===== Load Page ===== */
+function loadPage(page, updateURL=true){
+
+  document.querySelectorAll(".menu a").forEach(a=>{
+    a.classList.remove("active");
+    if(a.dataset.page === page){
+      a.classList.add("active");
+    }
+  });
+
+  const container = document.getElementById("main-content");
+  container.classList.remove("show");
+
+  fetch(`pages/${page}.html`)
+    .then(r=>r.text())
+    .then(html=>{
+      container.innerHTML = html;
+      requestAnimationFrame(()=>{
+        container.classList.add("show");
+      });
+
+      if(updateURL){
+        history.pushState({page}, "", `#${page}`);
+      }
+    })
+    .catch(()=>{
+      container.innerHTML="<p>Page not found.</p>";
+      container.classList.add("show");
+    });
+}
+
+/* ===== Navigation Click ===== */
+document.querySelectorAll(".menu a").forEach(link=>{
+  link.addEventListener("click",e=>{
+    e.preventDefault();
+    const page = link.dataset.page;
+    loadPage(page);
+  });
+});
+
+/* ===== Handle Browser Back/Forward ===== */
+window.addEventListener("popstate",()=>{
+  const page = location.hash.replace("#","") || "about";
+  loadPage(page,false);
+});
+
+/* ===== Initial Load ===== */
+window.addEventListener("DOMContentLoaded",()=>{
+  const page = location.hash.replace("#","") || "about";
+  loadPage(page,false);
+});
+
+</script>
+
+</body>
 </html>
